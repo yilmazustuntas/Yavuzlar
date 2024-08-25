@@ -1,0 +1,145 @@
+body {
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ccc;
+  padding: 60px;
+  border-radius: 15px;
+  background-color: #000000;
+  box-shadow: 0 4px 8px rgba(32, 32, 32, 0.1);
+  text-align: center;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+}
+
+button {
+  width: 50%;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #d5d4d4;
+  color: #000;
+}
+
+/* Login Form For CSS */
+
+.login {
+  width: 400px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  margin-bottom: 60px;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  color: #fff;
+}
+
+/* Homepage CSS */
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  width: 750px;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+.navbarContainer {
+  position: relative;  
+  background-color: black;
+  color: white;
+  padding: 50px;
+  border-radius: 15px;
+}
+
+.navbarButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  width: 200px;
+  height: 50px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+a {
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Admin page */
+
+.addUserForm input {
+   margin: 10px;
+  width: 35%; 
+  height: 40px; 
+}
+
+.addUserForm {
+  color: #ffffff;
+  font-size: 16px;
+  height: auto;
+}
+
+select {
+  width: 200px;
+  height: 37px;
+  border-radius: 15px;
+}
+
+.header {
+  margin-bottom: 7rem;
+  text-align: center;
+  font-size: 25px;
+}
+
+
+.search-button {
+  left : 0;
+  top: 0;
+  width: 100px;
+  margin-top: 10px;
+  margin-left: 10px;
+
+}
