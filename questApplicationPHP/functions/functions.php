@@ -118,11 +118,11 @@
     function getScore(){
         include "db.php";
 
-        $query = "SELECT score, nickname, name, surname FROM users ORDER BY score DESC";
+        $query = "SELECT score, nickname, name, surname FROM users WHERE groupName=:groupName ORDER BY score DESC";
 
         $statement = $pdo->prepare($query);
 
-        $statement->execute();
+        $statement->execute(['groupName' => 'student']);
 
         $result = $statement->fetchAll();
 
