@@ -1,0 +1,242 @@
+:root {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+
+  --admin: #dd5f5d;
+  --admin_dark: #d75452;
+  --company: #7a29c5;
+  --company_dark: #7a29c5;
+  --user: #59b471;
+  --user_dark: #56b381;
+}
+
+body {
+  height: 100vh;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #fcf7f1;
+}
+
+button {
+  height: 2rem;
+  min-width: 5rem;
+  background-color: var(--admin);
+  cursor: pointer;
+  border: none;
+  padding: 0.5rem;
+}
+
+button:hover {
+  box-shadow: 0px 10px 10px -8px rgba(0, 0, 0, 0.637);
+  scale: 1.0625;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.food_div {
+  display: flex;
+  justify-content: space-around;
+  border: 1px solid var(--admin);
+}
+
+.login {
+  text-align: center;
+  position: relative;
+  display: flex;
+  padding: 1.5rem;
+  width: 25rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.25rem;
+}
+
+.t0 {
+  background-color: var(--admin);
+  border: 1px solid var(--admin);
+}
+
+.b0 button, .red,
+.t0 button {
+  background-color: white;
+}
+
+.t1 {
+  background-color: var(--company);
+  border: 1px solid var(--company);
+}
+
+.b1 button,
+.t1 button {
+  background-color: white;
+}
+
+.t2 {
+  background-color: var(--user);
+  border: 1px solid var(--user);
+}
+
+.b2 button, .normal,
+.t2 button {
+  background-color: white;
+}
+
+.login_logo {
+  width: 256px;
+  height: 256px;
+  background-color: var(--user);
+  margin-bottom: 0.5rem;
+}
+
+.login_logo .t1 {
+  background-color: var(--user);
+}
+
+.login_logo .t2 {
+  background-color: var(--user);
+}
+
+.container_obj {
+  margin-bottom: 1rem;
+}
+
+.searchbox {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.centerDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  text-decoration: none;
+}
+
+.foodSection {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 1rem;
+}
+
+.foodDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 10rem;
+  padding: 0.5rem;
+}
+
+.imageContainer .foodPhoto,
+.medPhoto {
+  height: 128px;
+  width: 128px;
+}
+
+.imageContainer {
+  height: 128px;
+  width: 128px;
+  position: relative;
+}
+
+.discount {
+  font-weight: 600;
+  position: absolute;
+  bottom: -1rem;
+  right: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.highlight2 {
+  text-align: center;
+  font-weight: 600;
+  font-style: italic;
+  min-width: 5rem;
+  max-width: 6rem;
+  background-color: var(--admin);
+}
+
+.description {
+  font-size: 0.7rem;
+  color: rgb(80, 80, 80);
+}
+
+.cleanText {
+  text-decoration: none;
+}
+
+.company_logo,
+.food_photo {
+  max-width: 64px;
+  height: auto;
+  object-fit: cover;
+}
+
+.dataTable {
+  text-align: center;
+  border-collapse: collapse;
+}
+
+.dataTable th,
+.dataTable td {
+  margin: 0 0.5rem 0 0.5rem;
+  padding: 0.5rem;
+}
+
+.dataTable form {
+  margin-top: 1rem;
+}
+
+.dataTable .editQuantity {
+  min-width: 1.5rem;
+  width: 1.5rem;
+  margin: 0 0.5rem 0 0.5rem;
+}
+
+.quantityContainer {
+  display: flex;
+  align-items: center;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 35rem;
+}
+
+td .modalBtn{
+  text-decoration:underline;
+  text-decoration-color: var(--admin);
+}
+
+.headerText {
+  text-align: center;
+  font-weight: 600;
+  font-style: italic;
+}

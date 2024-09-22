@@ -1,0 +1,3 @@
+dosyanın dizininde çalıştırılacak kod:
+
+   docker-compose up --build

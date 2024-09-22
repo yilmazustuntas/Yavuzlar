@@ -1,0 +1,18 @@
+*firma kullanıcıları
+
+burgerking:burgerking123!
+
+mcdonalds:mcdonalds456!
+
+Katık:Katık1234?
+
+dominos:dominos987!
+
+*admin hesabı
+
+admin:admin
+
+*veri tabanı hesabı
+
+admin:password
+

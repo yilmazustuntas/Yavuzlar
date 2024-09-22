@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  php-apache:
+    build:
+      context: ./app
+    volumes:
+      - ./app:/var/www/html
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+
+  db:
+    image: mysql:latest
+    environment:
+      - MYSQL_DATABASE=restaurant_app
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=password
+      - MYSQL_ALLOW_EMPTY_PASSWORD=1
+    volumes:
+      - "./db:/docker-entrypoint-initdb.d"
+    ports:
+      - "3306:3306"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports: 
+      - "8001:80"
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
