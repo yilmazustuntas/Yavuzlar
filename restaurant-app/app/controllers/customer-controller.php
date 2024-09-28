@@ -1,7 +1,7 @@
 <?php
 require_once(__DIR__ . '/../scripts/functions.php');
 
-function UpdateProfile($name, $surname, $username)
+function UpdateProfile($name, $surname, $username, $image_path = null)
 {
     global $pdo;
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -10,14 +10,26 @@ function UpdateProfile($name, $surname, $username)
         $name = htmlclean($_POST['name']);
         $surname = htmlclean($_POST['surname']);
         $username = htmlclean($_POST['username']);
-        $query = "UPDATE users SET name = :name, surname = :surname, username = :username WHERE id = :id";
-        $statement = $pdo->prepare($query);
-        $statement->execute(['name' => $name, 'surname' => $surname, 'username' => $username, 'id' => $id]);
+        
+        if ($image_path) {
+            $query = "UPDATE users SET name = :name, surname = :surname, username = :username, image_path = :image_path WHERE id = :id";
+            $statement = $pdo->prepare($query);
+            $statement->execute(['name' => $name, 'surname' => $surname, 'username' => $username, 'image_path' => $image_path, 'id' => $id]);
+        } else {
+            $query = "UPDATE users SET name = :name, surname = :surname, username = :username WHERE id = :id";
+            $statement = $pdo->prepare($query);
+            $statement->execute(['name' => $name, 'surname' => $surname, 'username' => $username, 'id' => $id]);
+        }
+      
         $_SESSION['name'] = $name;
         $_SESSION['surname'] = $surname;
         $_SESSION['username'] = $username;
+        if ($image_path) {
+            $_SESSION['image_path'] = $image_path;
+        }
     }
 }
+
 
 function AddBalance($amount)
 {
@@ -224,6 +236,7 @@ function GetBasketDatas($user_id)
     $user_id = htmlclean($user_id);
     $query = "SELECT
     food.id AS food_id,
+    food.restaurant_id AS food_restaurant_id,
     food.price AS food_price,
     food.discount AS food_discount,
     basket.id AS basket_id,
@@ -236,7 +249,6 @@ function GetBasketDatas($user_id)
     $statement->execute(["user_id" => $user_id]);
     return $statement->fetchAll(PDO::FETCH_ASSOC);
 }
-
 function UpdateBalance($user_id, $total_price)
 {
     global $pdo;
@@ -260,20 +272,40 @@ function AddOrderItems($food_id, $order_id, $quantity, $price)
     $statement->execute(["food_id" => $food_id, "order_id" => $order_id, "quantity" => $quantity, "price" => $price]);
 }
 
-function ConfirmBasket($user_id, $total_price)
+function ConfirmBasket($user_id, $cupon = null)
 {
     global $pdo;
     $user_id = htmlclean($user_id);
+    $datas = GetBasketDatas($user_id);
     $created_at = (new DateTime())->format('Y-m-d H:i:s');
+    $total_price = 0;
+    $applied_discount = 0;
+    foreach ($datas as $data) {
+        $data['food_price'] = is_null(value: $data['food_discount']) ?: $data['food_price'] * (100 - $data['food_discount']) / 100;
+        if ($cupon) {
+            if ($cupon['restaurant_id'] === null || $cupon['restaurant_id'] == $data['food_restaurant_id']) {
+                $discount_amount = $data['food_price'] * ($cupon['discount'] / 100);
+                $data['food_price'] -= $discount_amount;
+                $applied_discount += $discount_amount * $data['basket_quantity'];
+            }
+        }
+        $total_price += $data['food_price'] * $data['basket_quantity'];
+    }
     $query = "INSERT INTO `order` (user_id, total_price, created_at) VALUES (:user_id, :total_price, :created_at)";
     $statement = $pdo->prepare($query);
     $statement->execute(["user_id" => $user_id, "total_price" => $total_price, "created_at" => $created_at]);
     $order_id = $pdo->lastInsertId();
-    $datas = GetBasketDatas($user_id);
+
     foreach ($datas as $data) {
-        $data['food_price'] = is_null($data['food_discount']) ? $data['food_price'] : $data['food_price'] * (100 - $data['food_discount']) / 100;
+        $data['food_price'] = is_null(value: $data['food_discount']) ?: $data['food_price'] * (100 - $data['food_discount']) / 100;
+        if ($cupon) {
+            if ($cupon['restaurant_id'] === null || $cupon['restaurant_id'] == $data['food_restaurant_id']) {
+                $discount_amount = $data['food_price'] * ($cupon['discount'] / 100);
+                $data['food_price'] -= $discount_amount;
+            }
+        }
         DeleteFromBasket($data['basket_id']);
-        AddOrderItems($data['food_id'], $order_id, $data['basket_quantity'], $total_price);
+        AddOrderItems($data['food_id'], $order_id, $data['basket_quantity'], $data['food_price']);
     }
     UpdateBalance($user_id, $total_price);
 }
@@ -292,8 +324,27 @@ function GetCuponByRId($restaurant_id)
 {
     global $pdo;
     $restaurant_id = htmlclean($restaurant_id);
-    $query = "SELECT * FROM cupon WHERE restaurant_id = :restaurant_id";
+    $query = "SELECT * FROM cupon WHERE id = :restaurant_id";
     $statement = $pdo->prepare($query);
     $statement->execute(["restaurant_id" => $restaurant_id]);
     return $statement->fetch(PDO::FETCH_ASSOC);
+}
+
+function GetCuponByName($cupon_name)
+{
+    global $pdo;
+    $cupon_name = htmlclean($cupon_name);
+    $query = "SELECT * FROM cupon WHERE name = :cupon_name";
+    $statement = $pdo->prepare($query);
+    $statement->execute(["cupon_name" => $cupon_name]);
+    return $statement->fetch(PDO::FETCH_ASSOC);
+}
+
+function DeleteCuponByName($cupon_name)
+{
+    global $pdo;
+    $cupon_name = htmlclean($cupon_name);
+    $query = "DELETE FROM cupon WHERE name = :cupon_name";
+    $statement = $pdo->prepare($query);
+    $statement->execute(["cupon_name" => $cupon_name]);
 }

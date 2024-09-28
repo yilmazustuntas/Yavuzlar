@@ -8,9 +8,10 @@ if (!IsUserLoggedIn()) {
     header("Location: ../index.php?message=403 Yetkisiz Giriş");
 }
 include "../controllers/customer-controller.php";
-
 $user_id = $_SESSION['user_id'];
-$total_price = $_POST['total_price'];
-ConfirmBasket($user_id, $total_price);
+$cupon = isset($_SESSION['cupon']) ? $_SESSION['cupon'] : null;
+if ($cupon === null) {
+}
+ConfirmBasket($user_id,$cupon);
 header("Location: ../orders.php");
 exit();

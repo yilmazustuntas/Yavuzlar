@@ -22,6 +22,7 @@ require_once "header.php";
     <div class="login t<?php echo $_SESSION['role']; ?>">
         <h2>Profil</h2>
         <div>
+            <img name="logo" class="medPhoto container_obj" src="<?php echo $_SESSION['image_path']; ?>" alt="Profil Resmi" class="company_logo">
             <h4>Ad: <?php echo $_SESSION['name']; ?></h4>
             <h4>Soyad: <?php echo $_SESSION['surname']; ?></h4>
             <h4>Kullanıcı Adı: <?php echo $_SESSION['username']; ?></h4>

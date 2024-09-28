@@ -42,7 +42,7 @@ require_once "header.php";
                 </div>
                 <div class="container_obj">
                     <label for="image">Restoran Logosu:</label><br>
-                    <input style="border-radius: 15px; width: 200px; padding: 5px; margin-top: 10px;" type="file" value="<?php echo $restaurant['image_path']; ?>" name="image" accept="image/*" required />
+                    <input style="border-radius: 15px; width: 200px; padding: 5px; margin-top: 10px;" type="file" value="<?php echo $restaurant['image_path']; ?>" name="image" accept="image/*"/>
                 </div>
                 <button style="border-radius: 15px;" type="submit">Güncelle</button>
             </form>

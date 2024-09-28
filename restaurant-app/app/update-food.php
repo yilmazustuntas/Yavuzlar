@@ -43,7 +43,7 @@ require_once "header.php";
 
                 <div class="container_obj">
                     <label for="image">Yemek Fotoğrafı:</label><br>
-                    <input style="border-radius: 15px; width: 200px; padding: 5px; margin-top: 10px;" type="file" name="image" accept="image/*" required>
+                    <input style="border-radius: 15px; width: 200px; padding: 5px; margin-top: 10px;" type="file" name="image" accept="image/*">
                 </div>
 
                 <div class="container_obj">

@@ -30,7 +30,7 @@ require_once "header.php";
             echo "<p>Kullanıcıya ait hiçbir sipariş bulunamadı.</p>";
         } else { ?>
             <div class="searchbox">
-                <input type="search" id="searchbox" placeholder="Sipariş Ara" />
+                <input style="border-radius: 8px; width: 200px;" type="search" id="searchbox" placeholder="Sipariş Ara" />
             </div>
 
             <table class="dataTable">
@@ -88,7 +88,7 @@ require_once "header.php";
             </table>
         <?php } ?>
         <div class="centerDiv">
-            <a href="index.php" style="margin-top: 1.5rem;" class=" b<?php echo $_SESSION['role']; ?>"><button>Ana Sayfa</button></a>
+            <a href="index.php" style="margin-top: 1.5rem;" class=" b<?php echo $_SESSION['role']; ?>"><button style="border-radius: 15px; background-color: #dd5f5d;;">Ana Sayfa</button></a>
         </div>
     </div>
     <?php require_once "footer.php"; ?>
