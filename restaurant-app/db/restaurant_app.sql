@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: db:3306
--- Üretim Zamanı: 22 Eyl 2024, 14:58:15
+-- Üretim Zamanı: 28 Eyl 2024, 21:44:45
 -- Sunucu sürümü: 9.0.1
 -- PHP Sürümü: 8.2.8
 
@@ -31,17 +31,10 @@ CREATE TABLE `basket` (
   `id` int NOT NULL,
   `user_id` int NOT NULL,
   `food_id` int NOT NULL,
-  `note` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `quantity` int NOT NULL,
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Tablo döküm verisi `basket`
---
-
-INSERT INTO `basket` (`id`, `user_id`, `food_id`, `note`, `quantity`, `created_at`) VALUES
-(3, 5, 2, 'yarım saati geçerse gelmesin', 1, '2024-09-22 15:32:16');
 
 -- --------------------------------------------------------
 
@@ -53,9 +46,9 @@ CREATE TABLE `comments` (
   `id` int NOT NULL,
   `user_id` int NOT NULL,
   `restaurant_id` int NOT NULL,
-  `username` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `score` int NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
@@ -76,9 +69,9 @@ INSERT INTO `comments` (`id`, `user_id`, `restaurant_id`, `username`, `title`, `
 
 CREATE TABLE `company` (
   `id` int NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `logo_path` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `logo_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -101,7 +94,7 @@ INSERT INTO `company` (`id`, `name`, `description`, `logo_path`, `deleted_at`) V
 CREATE TABLE `cupon` (
   `id` int NOT NULL,
   `restaurant_id` int DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `discount` int NOT NULL,
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -111,11 +104,11 @@ CREATE TABLE `cupon` (
 --
 
 INSERT INTO `cupon` (`id`, `restaurant_id`, `name`, `discount`, `created_at`) VALUES
-(1, NULL, 'hoşgeldin50', 50, '2024-09-22 15:13:56'),
-(2, 1, 'ilk25', 25, '2024-09-22 15:14:12'),
 (3, 4, 'sepette100', 50, '2024-09-22 15:14:36'),
 (4, 7, 'tıklagelsin', 30, '2024-09-22 15:14:56'),
-(5, NULL, 'guncell', 15, '2024-09-22 15:15:12');
+(5, NULL, 'guncell', 15, '2024-09-22 15:15:12'),
+(6, 1, 'ilk25', 25, '2024-09-28 20:51:31'),
+(7, NULL, 'hoşgeldin50', 50, '2024-09-28 20:51:57');
 
 -- --------------------------------------------------------
 
@@ -126,9 +119,9 @@ INSERT INTO `cupon` (`id`, `restaurant_id`, `name`, `discount`, `created_at`) VA
 CREATE TABLE `food` (
   `id` int NOT NULL,
   `restaurant_id` int NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `image_path` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `image_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `price` int NOT NULL,
   `discount` int NOT NULL,
   `created_at` datetime NOT NULL,
@@ -143,7 +136,7 @@ INSERT INTO `food` (`id`, `restaurant_id`, `name`, `description`, `image_path`, 
 (1, 1, 'Whopper Menü', 'Whopper Menü keyfini istediğin gibi yaşa!', './uploads/food/1727009827.png', 250, 5, '2024-09-22 14:57:07', NULL),
 (2, 2, 'Big King Menü', 'Big King Menü keyfini istediğin gibi yaşa!', './uploads/food/1727010045.png', 250, 10, '2024-09-22 15:00:45', NULL),
 (3, 4, 'Çıtır Kova Menü', 'Doyuran Lezzet !', './uploads/food/1727010346.jpg', 552, 3, '2024-09-22 15:05:46', NULL),
-(4, 5, 'Tavuk Döner', 'Katık', './uploads/food/1727010467.jpeg', 140, 0, '2024-09-22 15:07:47', NULL),
+(4, 5, 'Tavuk Döner', 'Katık', './uploads/food/1727010467.jpeg', 140, 0, '2024-09-26 23:44:45', NULL),
 (5, 6, 'Orta Boy Pizza', 'Bol Malzemeli ', './uploads/food/1727010664.jpg', 240, 6, '2024-09-22 15:11:04', NULL),
 (6, 7, 'Büyük Boy Pizza', 'Lezzeti Damağında Kalır !', './uploads/food/1727010711.jpeg', 300, 4, '2024-09-22 15:11:51', NULL);
 
@@ -167,7 +160,9 @@ CREATE TABLE `order` (
 
 INSERT INTO `order` (`id`, `user_id`, `order_status`, `total_price`, `created_at`) VALUES
 (1, 5, 2, 338, '2024-09-22 15:17:48'),
-(2, 6, 1, 178, '2024-09-22 15:43:58');
+(2, 6, 1, 178, '2024-09-22 15:43:58'),
+(20, 5, 1, 403, '2024-09-28 21:39:51'),
+(21, 5, 2, 225, '2024-09-28 21:40:02');
 
 -- --------------------------------------------------------
 
@@ -190,7 +185,10 @@ CREATE TABLE `order_items` (
 INSERT INTO `order_items` (`id`, `food_id`, `order_id`, `quantity`, `price`) VALUES
 (1, 3, 1, 1, 338),
 (2, 4, 1, 1, 338),
-(3, 1, 2, 1, 178);
+(3, 1, 2, 1, 178),
+(24, 2, 20, 1, 225),
+(25, 1, 20, 1, 178),
+(26, 2, 21, 1, 225);
 
 -- --------------------------------------------------------
 
@@ -201,9 +199,9 @@ INSERT INTO `order_items` (`id`, `food_id`, `order_id`, `quantity`, `price`) VAL
 CREATE TABLE `restaurant` (
   `id` int NOT NULL,
   `company_id` int NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `image_path` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `image_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -230,10 +228,11 @@ CREATE TABLE `users` (
   `id` int NOT NULL,
   `company_id` int DEFAULT NULL,
   `role` tinyint NOT NULL DEFAULT '2',
-  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `surname` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `username` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `surname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `image_path` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `balance` int NOT NULL DEFAULT '5000',
   `created_at` datetime NOT NULL,
   `deleted_at` datetime DEFAULT NULL
@@ -243,15 +242,15 @@ CREATE TABLE `users` (
 -- Tablo döküm verisi `users`
 --
 
-INSERT INTO `users` (`id`, `company_id`, `role`, `name`, `surname`, `username`, `password`, `balance`, `created_at`, `deleted_at`) VALUES
-(0, NULL, 0, 'admin', 'admin', 'admin', '$argon2id$v=19$m=65536,t=4,p=1$S0Q5MFVIc3RiMzJHb0NoeQ$U74dYhrrSF9Cqvg71HH5XEnEM3PY9aL6dHU2NkoKI58', 5000, '2024-09-15 17:18:48', NULL),
-(1, 1, 1, 'TAB', 'Gıda ', 'burgerking', '$argon2id$v=19$m=65536,t=4,p=1$clpLNDJjS3JYcEsyZ2w0RA$4r5O9ECmsRqLerpl/7S2HfBk5DBwVLCrYDST9Ud9ShQ', 5000, '2024-09-22 14:48:01', NULL),
-(2, 2, 1, 'Anadolu', 'Grubu', 'mcdonalds', '$argon2id$v=19$m=65536,t=4,p=1$ZHdpZC43WmxwOTQxRDcyMw$dJh9q1c9dGvHiBjKtSvStr4L2Eiu7lQZhB1CZcWIyKg', 5000, '2024-09-22 14:49:32', NULL),
-(3, 3, 1, 'Çoban', 'Katık', 'Katık', '$argon2id$v=19$m=65536,t=4,p=1$NDN6d0dXTlRyQUVVNjNtOQ$fj2RNMGMMMBlDAg5hQsHQWFDFWrzhRxsUT8gdkb+ZKQ', 5000, '2024-09-22 14:50:26', NULL),
-(4, 4, 1, 'Dominos', 'Pizza', 'dominos', '$argon2id$v=19$m=65536,t=4,p=1$VzFLUW12RTdUb1U1UnNZTA$k46SPHuj2ejJ5AP2UtP8YEME1xB1M6R0axGNFn9IhMc', 5000, '2024-09-22 14:51:07', NULL),
-(5, NULL, 2, 'Yılmaz', 'Üstüntaş', 'yilmaz', '$argon2id$v=19$m=65536,t=4,p=1$Mnk2U3dsRkZmaTVnZTU5eA$Ypy2kLMWqSEHlLck/ihssOycNCzt3IFYur3mvg5DQlE', 4662, '2024-09-22 15:16:08', NULL),
-(6, NULL, 2, 'Zeynep', 'Dağoğlu', 'zeyn', '$argon2id$v=19$m=65536,t=4,p=1$WFRMOFdFSE50WW44MnJWQQ$daDZkP4UR+CJQusSo/RJau2amM/mQuAqFesuJMeqL9I', 5022, '2024-09-22 15:41:46', NULL),
-(7, NULL, 2, 'Ahmet', 'Keskin', 'ahmet', '$argon2id$v=19$m=65536,t=4,p=1$a09mRjV3cUpXM2pVOWs5ZA$FlStmd2wqMY8g5AtX+MQdWpxTi1CLmzEEDfoUxTG5uE', 5000, '2024-09-22 14:57:18', '2024-09-22 14:57:40');
+INSERT INTO `users` (`id`, `company_id`, `role`, `name`, `surname`, `username`, `image_path`, `password`, `balance`, `created_at`, `deleted_at`) VALUES
+(0, NULL, 0, 'admin', 'admin', 'admin', './uploads/users/1727558849.png', '$argon2id$v=19$m=65536,t=4,p=1$S0Q5MFVIc3RiMzJHb0NoeQ$U74dYhrrSF9Cqvg71HH5XEnEM3PY9aL6dHU2NkoKI58', 5000, '2024-09-15 17:18:48', NULL),
+(1, 1, 1, 'TAB', 'Gıda ', 'burgerking', './uploads/users/1727558907.jpg', '$argon2id$v=19$m=65536,t=4,p=1$clpLNDJjS3JYcEsyZ2w0RA$4r5O9ECmsRqLerpl/7S2HfBk5DBwVLCrYDST9Ud9ShQ', 5000, '2024-09-22 14:48:01', NULL),
+(2, 2, 1, 'Anadolu', 'Grubu', 'mcdonalds', './uploads/users/1727558908.png', '$argon2id$v=19$m=65536,t=4,p=1$ZHdpZC43WmxwOTQxRDcyMw$dJh9q1c9dGvHiBjKtSvStr4L2Eiu7lQZhB1CZcWIyKg', 5000, '2024-09-22 14:49:32', NULL),
+(3, 3, 1, 'Çoban', 'Katık', 'Katık', './uploads/users/1727558999.jpeg', '$argon2id$v=19$m=65536,t=4,p=1$NDN6d0dXTlRyQUVVNjNtOQ$fj2RNMGMMMBlDAg5hQsHQWFDFWrzhRxsUT8gdkb+ZKQ', 5000, '2024-09-22 14:50:26', NULL),
+(4, 4, 1, 'Dominos', 'Pizza', 'dominos', './uploads/users/1727558910.png', '$argon2id$v=19$m=65536,t=4,p=1$VzFLUW12RTdUb1U1UnNZTA$k46SPHuj2ejJ5AP2UtP8YEME1xB1M6R0axGNFn9IhMc', 5000, '2024-09-22 14:51:07', NULL),
+(5, NULL, 2, 'Yılmaz', 'Üstüntaş', 'yilmaz', './uploads/users/1727558849.png', '$argon2id$v=19$m=65536,t=4,p=1$Mnk2U3dsRkZmaTVnZTU5eA$Ypy2kLMWqSEHlLck/ihssOycNCzt3IFYur3mvg5DQlE', 4034, '2024-09-22 15:16:08', NULL),
+(6, NULL, 2, 'Zeynep', 'Dağoğlu', 'zeyn', './uploads/users/1727558909.png', '$argon2id$v=19$m=65536,t=4,p=1$WFRMOFdFSE50WW44MnJWQQ$daDZkP4UR+CJQusSo/RJau2amM/mQuAqFesuJMeqL9I', 5022, '2024-09-22 15:41:46', NULL),
+(7, NULL, 2, 'Ahmet', 'Keskin', 'ahmet', './uploads/users/1727558849.png', '$argon2id$v=19$m=65536,t=4,p=1$a09mRjV3cUpXM2pVOWs5ZA$FlStmd2wqMY8g5AtX+MQdWpxTi1CLmzEEDfoUxTG5uE', 5000, '2024-09-22 14:57:18', '2024-09-22 14:57:40');
 
 --
 -- Dökümü yapılmış tablolar için indeksler
@@ -330,7 +329,7 @@ ALTER TABLE `users`
 -- Tablo için AUTO_INCREMENT değeri `basket`
 --
 ALTER TABLE `basket`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `comments`
@@ -348,25 +347,25 @@ ALTER TABLE `company`
 -- Tablo için AUTO_INCREMENT değeri `cupon`
 --
 ALTER TABLE `cupon`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `food`
 --
 ALTER TABLE `food`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `restaurant`
@@ -378,7 +377,7 @@ ALTER TABLE `restaurant`
 -- Tablo için AUTO_INCREMENT değeri `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Dökümü yapılmış tablolar için kısıtlamalar
