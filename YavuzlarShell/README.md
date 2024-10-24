@@ -9,6 +9,7 @@ veritabanı şifreleri veya konfigürasyon dosyaları) bilgi çalabilir ve köt�
 Yavuzlar Web Shell Kullanım Klavuzu:
 
     - [Dosya Düzenle] Düzenlenecek dosyanın ismini girip 'yeni içerik' kısmına dosyaya ne yazacağınızı giriniz.
+    - [📄dosya_adı] Düzenlenecek dosyanın ismi ve içeriğini görmenize yarar tıklamaız yeterli.
     - [Dosya Sil] Dosya silme işlemi için olduğunuz dizinden dosyalar kısmından silmek istediğinizi kopyalayıp yapıştırmak yeterlidir.
     - [Komut Çalıştır] Komut çalıştırma işlemi (whoami,ls,vb.) komutları deneyebilirsiniz.
     - [Dosya Ara] Bulunduğunuz dizindeki dosyaları aramanıza yardımcı olur.(örn:index.php gibi)
